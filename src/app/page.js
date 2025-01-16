@@ -17,9 +17,9 @@ export default function HomePage() {
         <Chessboard />
 
         {isBottom && (
-          <div className="fixed bottom-[calc(100vh-100px)] left-3 z-20" style={{ bottom: `${footerHeight + 15}px` }}>
+          <div className="fixed bottom-[calc(100vh-100px)] left-7 z-20" style={{ bottom: `${footerHeight + 15}px` }}>
             <button onClick={scrollToTop} className="btn-w">
-              <img src={"/back-top-light.png"} className="icon-style-opposite"></img>
+              <img src={"icons/back-top-light.png"} className="icon-style-opposite"></img>
               {t("top")}
             </button>
           </div>

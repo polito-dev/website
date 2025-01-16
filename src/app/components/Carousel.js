@@ -21,7 +21,7 @@ const imageLinks = [
 
 export default function Carousel() {
     const { t } = useTranslation();
-    const { currentImage, progress, fade } = functions();
+    const { currentImage, progress, fade, changeImage, arrowsVisible, showArrows } = functions();
 
     return (
         <div className="flex-1 flex flex-col items-center justify-center w-full">
@@ -43,20 +43,35 @@ export default function Carousel() {
                     style={{ width: `${progress}%` }}
                 ></div>
             </div>
-            <a href={imageLinks[currentImage]} target="_blank" rel="noopener noreferrer" className="max-w-full w-full">
-                <img
-                    src={carouselImages[currentImage]}
-                    className={`max-w-full w-full transition-opacity duration-500 ${fade ? 'opacity-100' : 'opacity-0'}`}
-                    style={{ height: '400px', objectFit: 'cover' }}
-                />
-            </a>
+            <div
+                onMouseEnter={() => showArrows(true)}
+                onMouseLeave={() => showArrows(false)}
+            >
+                <button
+                    onClick={() => changeImage(-1)}
+                    className={`arrow !left-1 ${arrowsVisible ? 'opacity-100' : 'opacity-0'}`}>
+                    &lt;
+                </button>
+                <a href={imageLinks[currentImage]} target="_blank" rel="noopener noreferrer" className="max-w-full w-full">
+                    <img
+                        src={carouselImages[currentImage]}
+                        className={`max-w-full w-full transition-opacity duration-500 ${fade ? 'opacity-100' : 'opacity-0'}`}
+                        style={{ height: '400px', objectFit: 'cover' }}
+                    />
+                </a>
+                <button
+                    onClick={() => changeImage(1)}
+                    className={`arrow !right-1 ${arrowsVisible ? 'opacity-100' : 'opacity-0'}`}>
+                    &gt;
+                </button>
+            </div>
             <footer className="w-full flex justify-between space-x-3 mt-5">
                 <a href="https://t.me/BitPolitoForum" target="_blank" rel="noopener noreferrer" className="btn-w flex items-center space-x-2">
-                    <img src={"/telegram-icon-light.png"} className="icon-style-opposite"></img>
+                    <img src={"icons/telegram-light.png"} className="icon-style-opposite"></img>
                     <span>{t("telegram")}</span>
                 </a>
                 <a href="#" className="btn-b rounded-md border-blue-700">
-                    <img src="/donate-light.png" className="icon-style"></img>
+                    <img src="icons/donate-light.png" className="icon-style"></img>
                     {t("donate")}
                 </a>
             </footer>
