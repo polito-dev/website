@@ -8,7 +8,6 @@ export default function functions() {
     const [isBottom, setIsBottom] = useState(false);
     const [footerHeight, setFooterHeight] = useState(0);
     const footerRef = useRef(null);
-    const contentRef = useRef(null);
 
     const scrollToTop = () => {
         const scrollInterval = setInterval(() => {
@@ -39,15 +38,6 @@ export default function functions() {
     }, [isBottom]);
 
     useEffect(() => {
-        if (contentRef.current) {
-            const lastChild = contentRef.current.lastElementChild;
-            if (lastChild) {
-                lastChild.style.marginBottom = `${footerHeight + 80}px`;
-            }
-        }
-    }, [footerHeight]);
-
-    useEffect(() => {
         const handleResize = () => {
             if (footerRef.current) {
                 setFooterHeight(footerRef.current.offsetHeight);
@@ -72,7 +62,7 @@ export default function functions() {
                 setCurrentImage((prev) => (prev + 1) % carouselImages.length);
                 setProgress(0);
                 setFade(true);
-            }, 150);
+            }, 100);
         }, 15000);
 
         const progressInterval = setInterval(() => {
@@ -93,7 +83,7 @@ export default function functions() {
             setCurrentImage((prev) => (prev + direction + carouselImages.length) % carouselImages.length);
             setProgress(0);
             setFade(true);
-        }, 150);
+        }, 100);
     };
 
     const showArrows = (visible) => {
@@ -101,7 +91,7 @@ export default function functions() {
     };
 
     return {
-        isBottom, footerHeight, footerRef, contentRef, scrollToTop, // page.js
+        isBottom, footerHeight, footerRef, scrollToTop, // page.js
         currentImage, progress, fade, changeImage, arrowsVisible, showArrows // Carousel.js
     };
 };

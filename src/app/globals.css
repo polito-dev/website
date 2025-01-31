@@ -27,7 +27,7 @@ body {
 }
 
 .dark .btn-w {
-  @apply text-white;
+  @apply border-white text-white;
   background-color: blue;
 }
 
@@ -58,4 +58,8 @@ body {
 .arrow {
   @apply absolute top-1/2 transform -translate-y-1/2 bg-blue-700 text-white text-2xl rounded-full px-2 py-4 cursor-pointer transition-opacity duration-200 ease-in-out hover:bg-blue-500 hover:scale-110 hover:shadow-2xl font-bold;
   @apply dark:bg-white dark:text-blue-700;
+}
+
+.chessboard {
+  @apply w-full h-full object-contain border-2 border-blue-700 transition-all duration-500 ease-in-out hover:opacity-95 hover:scale-105 dark:border-white;
 }

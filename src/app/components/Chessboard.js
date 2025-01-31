@@ -88,16 +88,11 @@ export default function Chessboard() {
 
     return (
         <>
-            <img src="bitpolito-logo-light.png" className="icon-style-opposite !w-64 !h-16 pt-3 pl-4 mt-4"></img>
-
-            <h1 className="text-7xl my-2 mt-16 ml-4">{t("title")}</h1>
-            <h2 className="text-2xl my-2 mt-3 ml-4">{t("paragraph")}</h2>
-
             <div className="flex justify-center space-x-2 mb-3 pt-16 pl-4">
                 <a href="#" className="btn-b rounded-full">{t("events")}</a>
                 <a href="#" className="btn-b rounded-full">{t("podcast")}</a>
                 <a href="#" className="btn-b rounded-full">{t("projects")}</a>
-                <a href="#" className="btn-b rounded-full">{t("events")}</a>
+                <a href="#" className="btn-b rounded-full">{t("others")}</a>
             </div>
 
             <div className="grid grid-cols-3 gap-4 p-5 w-full max-w-5xl mx-auto">
@@ -108,12 +103,12 @@ export default function Chessboard() {
                             className={`${item.span === 2 ? 'col-span-2' : 'col-span-1'} h-80`}
                         >
                             {item.type === 'chart' ? (
-                                <img src="#" className="w-full h-full object-contain border-2 border-blue-700 transition-all duration-500 ease-in-out hover:opacity-95 hover:scale-105 dark:border-white"></img>
+                                <img src="#" className="chessboard"></img>
                             ) : (
                                 <a href={item.link} className="block w-full h-full">
                                     <img
                                         src={item.src}
-                                        className="w-full h-full object-contain border-2 border-blue-700 transition-all duration-500 ease-in-out hover:opacity-95 hover:scale-105 dark:border-white"
+                                        className="chessboard"
                                     />
                                 </a>
                             )}
@@ -129,6 +124,7 @@ export default function Chessboard() {
                     </button>
                 )}
             </div>
+            <div className="mb-16"></div>
         </>
     );
 }

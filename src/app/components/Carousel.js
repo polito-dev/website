@@ -26,7 +26,7 @@ export default function Carousel() {
     return (
         <div className="flex-1 flex flex-col items-center justify-center w-full">
             <header className="w-full flex justify-center">
-                <div className="flex items-center space-x-7">
+                <div className="flex items-center space-x-7 lg:flex hidden">
                     <DarkModeSwitch />
                     <LanguageSelector />
                 </div>
@@ -55,7 +55,7 @@ export default function Carousel() {
                 <a href={imageLinks[currentImage]} target="_blank" rel="noopener noreferrer" className="max-w-full w-full">
                     <img
                         src={carouselImages[currentImage]}
-                        className={`max-w-full w-full transition-opacity duration-500 ${fade ? 'opacity-100' : 'opacity-0'}`}
+                        className={`max-w-full w-full transition-opacity duration-700 ease-in-out ${fade ? 'opacity-100' : 'opacity-0'}`}
                         style={{ height: '400px', objectFit: 'cover' }}
                     />
                 </a>

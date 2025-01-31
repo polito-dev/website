@@ -2,18 +2,43 @@
 
 import { useTranslation } from "react-i18next";
 import "./i18n/i18n";
+import functions from "./functions";
 import Carousel from "./components/Carousel";
 import Footer from "./components/Footer";
 import Chessboard from "./components/Chessboard";
-import functions from "./functions";
+import DarkModeSwitch from "./components/DarkModeSwitch";
+import LanguageSelector from "./components/LanguageSelector";
 
 export default function HomePage() {
   const { t } = useTranslation();
-  const { isBottom, footerHeight, footerRef, contentRef, scrollToTop } = functions();
+  const { isBottom, footerHeight, footerRef, scrollToTop } = functions();
 
   return (
-    <div className="flex">
-      <div ref={contentRef} className="flex-1 overflow-y-auto min-h-screen pr-20 pl-2 break-words mr-[350px]" style={{ paddingBottom: `${footerHeight}px` }}>
+    <div className="flex flex-col min-h-screen">
+      <div className={`${"sm:pr-2 sm:mr-0 sm:ml-0 sm:break-words" +
+        " lg:flex-1 lg:overflow-y-auto lg:min-h-screen lg:pr-20 lg:pl-2 lg:break-words lg:mr-[350px]"
+        }`} style={{ paddingBottom: `${footerHeight}px` }}
+      >
+
+        <header className="w-full flex justify-between">
+          <img src="bitpolito-logo-light.png" className="icon-style-opposite !w-64 !h-16 pt-3 pl-4 mt-4"></img>
+          <div className="flex flex-col">
+            <div className="flex items-center space-x-2 lg:hidden block mt-3 mb-3 mr-4">
+              <DarkModeSwitch />
+            </div>
+            <div className="flex items-center space-x-2 lg:hidden block">
+              <LanguageSelector />
+            </div>
+          </div>
+        </header>
+
+        <h1 className="text-7xl my-2 mt-16 ml-4">{t("title")}</h1>
+        <h2 className="text-2xl my-2 mt-3 ml-4">{t("paragraph")}</h2>
+
+        <div className={`w-[400px] h-screen flex flex-col items-end justify-end p-2 ml-auto ${isBottom ? 'hidden' : 'block'} lg:fixed lg:right-0 lg:top-0 lg:z-20 absolute sm:relative`}>
+          <Carousel />
+        </div>
+
         <Chessboard />
 
         {isBottom && (
@@ -24,10 +49,6 @@ export default function HomePage() {
             </button>
           </div>
         )}
-      </div>
-
-      <div className={`w-[400px] h-screen flex flex-col items-end justify-end p-2 ml-auto fixed right-0 top-0 z-20 ${isBottom ? 'hidden' : 'block'}`}>
-        <Carousel />
       </div>
 
       {isBottom && (
