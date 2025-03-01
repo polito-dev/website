@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 const chessboardImages = [
     "/bitpolito-bitgen-3.jpg",
@@ -90,7 +91,7 @@ export default function Chessboard() {
         <>
             <div className="flex justify-center space-x-2 mb-3 pt-16 pl-4">
                 <a href="#" className="btn-b rounded-full">{t("events")}</a>
-                <a href="#" className="btn-b rounded-full">{t("podcast")}</a>
+                <Link href="/podcast" className="btn-b rounded-full">{t("podcast")}</Link>
                 <a href="#" className="btn-b rounded-full">{t("projects")}</a>
                 <a href="#" className="btn-b rounded-full">{t("others")}</a>
             </div>
