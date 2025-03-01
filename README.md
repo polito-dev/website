@@ -48,7 +48,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 [db - google drive](https://drive.google.com/drive/folders/1sUirMe1Cr_P1dcA20sraaevpdkDZiiBr?usp=drive_link)
 
-
 ## Branches Structure
 We use the dev branch as a staging branch, so all PR must be done toward that branch. Lastly they'll go in main. 
 The branch called "landing" is the one that contains the old landing page (curently live at bitpolito.it).
