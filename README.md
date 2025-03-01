@@ -44,7 +44,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 [old version - vercel](https://website-bit-politos-projects.vercel.app/en)
 
-[new version - vercel](https://website-wheat-psi.vercel.app/)
+[new version - vercel](https://website-git-dev-bit-politos-projects.vercel.app/)
 
 [db - google drive](https://drive.google.com/drive/folders/1sUirMe1Cr_P1dcA20sraaevpdkDZiiBr?usp=drive_link)
 
