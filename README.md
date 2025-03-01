@@ -40,13 +40,13 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 ## Useful Links
-[figma project] (https://www.figma.com/design/ssdd5DmVcAvOxY3g5bYAzB/Grafica-Bitpolito-%E2%80%93-Website?node-id=248-8520&t=h6i8QT3Hiv1Peap8-1)
+[figma project](https://www.figma.com/design/ssdd5DmVcAvOxY3g5bYAzB/Grafica-Bitpolito-%E2%80%93-Website?node-id=248-8520&t=h6i8QT3Hiv1Peap8-1)
 
 [old version - vercel](https://website-bit-politos-projects.vercel.app/en)
 
 [new version - vercel](https://website-wheat-psi.vercel.app/)
 
-[db - googledrive][https://drive.google.com/drive/folders/1sUirMe1Cr_P1dcA20sraaevpdkDZiiBr?usp=drive_link)
+[db - googledrive](https://drive.google.com/drive/folders/1sUirMe1Cr_P1dcA20sraaevpdkDZiiBr?usp=drive_link)
 
 
 ## Branches Structure
