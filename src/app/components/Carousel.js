@@ -68,11 +68,11 @@ export default function Carousel() {
             </div>
             <footer className="w-full flex justify-between space-x-3 mt-5">
                 <a href="https://t.me/BitPolitoForum" target="_blank" rel="noopener noreferrer" className="btn-w flex items-center space-x-2">
-                    <img src={"icons/telegram-light.png"} className="icon-style-opposite"></img>
+                    <img src={"icons/bitpolito-icon-social-telegram.svg"} className="icon-style-opposite"></img>
                     <span>{t("telegram")}</span>
                 </a>
                 <a href="#" className="btn-b rounded-md border-blue-700">
-                    <img src="icons/donate-light.png" className="icon-style"></img>
+                    <img src="icons/donate-light.png" className="icon-style !w-6 !h-6"></img>
                     {t("donate")}
                 </a>
             </footer>

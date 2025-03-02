@@ -10,11 +10,11 @@ export default function Footer() {
 
             <div className="flex justify-between space-x-3">
                 <a href='mailto: info@bitpolito.it' target="_blank" rel="noopener noreferrer" className="btn-b rounded-md">
-                    <img src={"icons/email-light.png"} className="icon-style"></img>
+                    <img src={"icons/bitpolito-icon-mail.svg"} className="icon-style"></img>
                     info@bitpolito.it
                 </a>
                 <a href="https://forms.gle/P9mzEhqh8DdrkyQ96" target="_blank" rel="noopener noreferrer" className="btn-b rounded-md">
-                    <img src={"icons/join-us-light.png"} className="icon-style"></img>
+                    <img src={"icons/bitpolito-icon-share.svg"} className="icon-style"></img>
                     {t("apply")}
                 </a>
             </div>
@@ -23,31 +23,31 @@ export default function Footer() {
 
             <div className="flex justify-between space-x-2">
                 <a href="https://t.me/BitPolitoForum" target="_blank" rel="noopener noreferrer" className="btn-b rounded-md">
-                    <img src="icons/telegram-light.png" className="icon-style"></img>
+                    <img src="icons/bitpolito-icon-social-telegram.svg" className="icon-style"></img>
                     Telegram
                 </a>
                 <a href="https://www.linkedin.com/company/bitpolito/?originalSubdomain=it" target="_blank" rel="noopener noreferrer" className="btn-b rounded-md">
-                    <img src="icons/linkedIn-light.png" className="icon-style"></img>
+                    <img src="icons/bitpolito-icon-social-linkedin.svg" className="icon-style"></img>
                     LinkedIn
                 </a>
-                <a href="#" target="_blank" rel="noopener noreferrer" className="btn-b rounded-md">
-                    <img src="#" className="icon-style"></img>
+                <a href="https://www.x.com/bitpolito" target="_blank" rel="noopener noreferrer" className="btn-b rounded-md">
+                    <img src="icons/bitpolito-icon-social-x.svg" className="icon-style"></img>
                     X (Twitter)
                 </a>
                 <a href="https://www.instagram.com/bitpolito/" target="_blank" rel="noopener noreferrer" className="btn-b rounded-md">
-                    <img src="icons/instagram-light.png" className="icon-style"></img>
+                    <img src="icons/bitpolito-icon-social-instagram.svg" className="icon-style"></img>
                     Instagram
                 </a>
                 <a href="https://www.youtube.com/@BitPolito" target="_blank" rel="noopener noreferrer" className="btn-b rounded-md">
-                    <img src="icons/youtube-light.png" className="icon-style"></img>
+                    <img src="icons/bitpolito-icon-social-youtube.svg" className="icon-style"></img>
                     YouTube
                 </a>
                 <a href="https://open.spotify.com/show/3xXqSrkyLloGhTozWMnuhH" target="_blank" rel="noopener noreferrer" className="btn-b rounded-md">
-                    <img src="icons/spotify-light.png" className="icon-style"></img>
+                    <img src="icons/bitpolito-icon-spotify.svg" className="icon-style"></img>
                     Spotify
                 </a>
                 <a href="https://github.com/BitPolito" target="_blank" rel="noopener noreferrer" className="btn-b rounded-md">
-                    <img src="icons/github-light.png" className="icon-style"></img>
+                    <img src="icons/bitpolito-icon-github.svg" className="icon-style"></img>
                     GitHub
                 </a>
             </div>
