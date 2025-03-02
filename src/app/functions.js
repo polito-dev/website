@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { carouselImages } from "./components/Carousel";
+import axios from "axios";
 
 export default function functions() {
     // page.js
@@ -90,8 +91,29 @@ export default function functions() {
         setArrowsVisible(visible);
     };
 
+    // SpotifyPodcast.js
+    const [episodes, setEpisodes] = useState([]);
+    const [currentEpisode, setCurrentEpisode] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchEpisodes() {
+            try {
+                const response = await axios.get("/api/spotify");
+                setEpisodes(response.data.episodes.items);
+                setCurrentEpisode(response.data.episodes.items[0]);
+            } catch (error) {
+                console.error("Error: ", error);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchEpisodes();
+    }, []);
+
     return {
         isBottom, footerHeight, footerRef, scrollToTop, // page.js
-        currentImage, progress, fade, changeImage, arrowsVisible, showArrows // Carousel.js
+        currentImage, progress, fade, changeImage, arrowsVisible, showArrows, // Carousel.js
+        episodes, currentEpisode, loading, setCurrentEpisode // SpotifyPodcast.js
     };
 };

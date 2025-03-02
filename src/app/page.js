@@ -44,7 +44,7 @@ export default function HomePage() {
         {isBottom && (
           <div className="fixed bottom-[calc(100vh-100px)] left-7 z-20" style={{ bottom: `${footerHeight + 15}px` }}>
             <button onClick={scrollToTop} className="btn-w">
-              <img src={"icons/back-top-light.png"} className="icon-style-opposite"></img>
+              <img src={"icons/back-top-light.png"} className="icon-style-opposite !w-6 !h-6"></img>
               {t("top")}
             </button>
           </div>
