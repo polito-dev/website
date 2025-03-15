@@ -56,6 +56,8 @@ export default function functions() {
     const [fade, setFade] = useState(true);
     const [arrowsVisible, setArrowsVisible] = useState(false);
 
+    const [isOpen, setIsOpen] = useState(false);
+
     useEffect(() => {
         const interval = setInterval(() => {
             setFade(false);
@@ -91,6 +93,28 @@ export default function functions() {
         setArrowsVisible(visible);
     };
 
+    // Disable scrolling when the popup is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.classList.add("overflow-hidden");
+        } else {
+            document.body.classList.remove("overflow-hidden");
+        }
+
+        return () => {
+            document.body.classList.remove("overflow-hidden");
+        };
+    }, [isOpen]);
+
+    // Allows to paragraph in the popup to go to a new line
+    const newLine = (text) =>
+        text.split(". ").map((sentence, i) => (
+            <span key={i}>
+                {sentence}.
+                <br />
+            </span>
+        ));
+
     // SpotifyPodcast.js
     const [episodes, setEpisodes] = useState([]);
     const [currentEpisode, setCurrentEpisode] = useState(null);
@@ -113,7 +137,7 @@ export default function functions() {
 
     return {
         isBottom, footerHeight, footerRef, scrollToTop, // page.js
-        currentImage, progress, fade, changeImage, arrowsVisible, showArrows, // Carousel.js
-        episodes, currentEpisode, loading, setCurrentEpisode // SpotifyPodcast.js
+        currentImage, progress, fade, changeImage, arrowsVisible, showArrows, isOpen, setIsOpen, newLine, // Carousel.js
+        episodes, currentEpisode, loading, setCurrentEpisode, // SpotifyPodcast.js
     };
 };

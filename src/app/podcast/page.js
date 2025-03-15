@@ -35,7 +35,7 @@ export default function Podcast() {
       )}
 
       {isBottom && (
-        <div ref={footerRef} className="w-full bg-blue-700 dark:bg-white text-white dark:text-blue-700 font-bold p-4 fixed bottom-0 left-0 flex flex-col items-center justify-center space-y-4 z-10">
+        <div ref={footerRef} className="w-full bg-blue-dark dark:bg-white text-white dark:text-blue-dark font-bold p-4 fixed bottom-0 left-0 flex flex-col items-center justify-center space-y-4 z-10">
           <Footer />
         </div>
       )}

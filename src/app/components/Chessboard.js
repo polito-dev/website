@@ -90,10 +90,10 @@ export default function Chessboard() {
     return (
         <>
             <div className="flex justify-center space-x-2 mb-3 pt-16 pl-4">
-                <a href="#" className="btn-b rounded-full">{t("events")}</a>
-                <Link href="/podcast" className="btn-b rounded-full">{t("podcast")}</Link>
-                <a href="#" className="btn-b rounded-full">{t("projects")}</a>
-                <a href="#" className="btn-b rounded-full">{t("others")}</a>
+                <a href="#" className="btn-b rounded-full !px-5">{t("events")}</a>
+                <Link href="/podcast" className="btn-b rounded-full !px-5">{t("podcast")}</Link>
+                <a href="#" className="btn-b rounded-full !px-5">{t("projects")}</a>
+                <a href="#" className="btn-b rounded-full !px-5">{t("others")}</a>
             </div>
 
             <div className="grid grid-cols-3 gap-4 p-5 w-full max-w-5xl mx-auto">
@@ -101,12 +101,12 @@ export default function Chessboard() {
                     row.map((item, colIndex) => (
                         <div
                             key={`${rowIndex}-${colIndex}`}
-                            className={`${item.span === 2 ? 'col-span-2' : 'col-span-1'} h-80`}
+                            className={`${item.span === 2 ? 'col-span-2' : 'col-span-1'} h-100`}
                         >
                             {item.type === 'chart' ? (
                                 <img src="#" className="chessboard"></img>
                             ) : (
-                                <a href={item.link} className="block w-full h-full">
+                                <a href={item.link} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
                                     <img
                                         src={item.src}
                                         className="chessboard"
