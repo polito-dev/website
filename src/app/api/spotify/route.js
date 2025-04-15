@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const client_id = process.env.SPOTIFY_CLIENT_ID;
-const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
+const clientId = process.env.SPOTIFY_CLIENT_ID;
+const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 
 export async function GET() {
     try {
@@ -10,14 +10,13 @@ export async function GET() {
             new URLSearchParams({ grant_type: "client_credentials" }).toString(),
             {
                 headers: {
-                    Authorization: `Basic ${Buffer.from(`${client_id}:${client_secret}`).toString("base64")}`,
+                    Authorization: `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString("base64")}`,
                     "Content-Type": "application/x-www-form-urlencoded",
                 },
             }
         );
 
         const accessToken = tokenResponse.data.access_token;
-
         const showId = "3xXqSrkyLloGhTozWMnuhH";
         const showResponse = await axios.get(`https://api.spotify.com/v1/shows/${showId}`, {
             headers: { Authorization: `Bearer ${accessToken}` },

@@ -1,9 +1,9 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import DarkModeSwitch from "./DarkModeSwitch";
 import LanguageSelector from "./LanguageSelector";
-import functions from "../functions";
 import Link from "next/link";
 
 export const carouselImages = [
@@ -13,16 +13,16 @@ export const carouselImages = [
     "/DRAFT-bitpolito-partnership-braiins.jpg"
 ];
 
-const imageLinks = [
-    "",
-    "",
-    "",
-    ""
-];
+const imageLinks = ["", "", "", ""];
 
 export default function Carousel() {
     const { t } = useTranslation();
-    const { currentImage, progress, fade, changeImage, arrowsVisible, showArrows, isOpen, setIsOpen, newLine } = functions();
+    const [currentImage, setCurrentImage] = useState(0);
+    const [progress, setProgress] = useState(0);
+    const [fade, setFade] = useState(true);
+    const [arrowsVisible, setArrowsVisible] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+
     const descriptionImages = [
         t("alt-img-1"),
         t("alt-img-2"),
@@ -30,16 +30,73 @@ export default function Carousel() {
         t("alt-img-4"),
     ];
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setFade(false);
+            setTimeout(() => {
+                setCurrentImage((prev) => (prev + 1) % carouselImages.length);
+                setProgress(0);
+                setFade(true);
+            }, 100);
+        }, 15000);
+
+        const progressInterval = setInterval(() => {
+            if (fade) {
+                setProgress((prev) => (prev + 1) % 100);
+            }
+        }, 150);
+
+        return () => {
+            clearInterval(interval);
+            clearInterval(progressInterval);
+        };
+    }, [fade]);
+
+    const changeImage = (direction) => {
+        setFade(false);
+        setTimeout(() => {
+            setCurrentImage((prev) => (prev + direction + carouselImages.length) % carouselImages.length);
+            setProgress(0);
+            setFade(true);
+        }, 100);
+    };
+
+    const showArrows = (visible) => {
+        setArrowsVisible(visible);
+    };
+
+    // Disable scrolling when the popup is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.classList.add("overflow-hidden");
+        } else {
+            document.body.classList.remove("overflow-hidden");
+        }
+
+        return () => {
+            document.body.classList.remove("overflow-hidden");
+        };
+    }, [isOpen]);
+
+    // Allows to paragraph in the popup to go to a new line
+    const newLine = (text) =>
+        text.split(". ").map((sentence, i) => (
+            <span key={i}>
+                {sentence}.
+                <br />
+            </span>
+        ));
+
     return (
         <div className="flex-1 flex flex-col items-center justify-center w-full">
             <header className="w-full flex justify-center">
-                <div className="flex items-center space-x-7 lg:flex hidden">
+                <div className="flex items-center gap-x-7 lg:flex hidden">
                     <DarkModeSwitch />
                     <LanguageSelector />
                 </div>
             </header>
 
-            <div className="flex justify-between space-x-8 mb-3 mt-7">
+            <div className="flex justify-between gap-x-8 mb-3 mt-7">
                 <a href="#" className="transition-all duration-200 hover:scale-105 font-bold">{t("projects")}</a>
                 <Link href="/podcast" className="transition-all duration-200 hover:scale-105 font-bold">{t("podcast")}</Link>
                 <a href="#" className="transition-all duration-200 hover:scale-105 font-bold">{t("about")}</a>
@@ -76,7 +133,7 @@ export default function Carousel() {
                 </button>
             </div>
 
-            <footer className="w-full flex justify-between space-x-3 mt-5">
+            <footer className="w-full flex justify-between gap-x-3 mt-5">
                 <a href="https://t.me/BitPolitoForum" target="_blank" rel="noopener noreferrer" className="btn-w !px-8">
                     <img src={"icons/bitpolito-icon-social-telegram.svg"} className="icon-style-opposite"></img>
                     <span>{t("telegram")}</span>
@@ -102,12 +159,11 @@ export default function Carousel() {
 
                         <div className="flex items-center">
                             <img src="#" className="w-60 h-64 object-cover"></img>
-                            <div className="flex flex-col ml-12 space-y-2">
+                            <div className="flex flex-col ml-12 gap-y-7">
                                 <a href="https://t.me/bitciccio" target="_blank" rel="noopener noreferrer" className="btn-w">
                                     <img src={"icons/bitpolito-icon-social-telegram.svg"} className="icon-style-opposite"></img>
                                     <span>@Bitciccio</span>
                                 </a>
-                                <div style={{ height: "25px" }}></div>
                                 <a href='mailto: francesco.pelle@studenti.polito.it' target="_blank" rel="noopener noreferrer" className="btn-w">
                                     <img src="icons/bitpolito-icon-mail.svg" className="icon-style-opposite"></img>
                                     francesco.pelle@studenti.polito.it

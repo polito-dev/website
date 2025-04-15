@@ -1,7 +1,25 @@
-import functions from "../functions";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function SpotifyPodcast() {
-    const { episodes, currentEpisode, loading, setCurrentEpisode } = functions();
+    const [episodes, setEpisodes] = useState([]);
+    const [currentEpisode, setCurrentEpisode] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchEpisodes() {
+            try {
+                const response = await axios.get("/api/spotify");
+                setEpisodes(response.data.episodes.items);
+                setCurrentEpisode(response.data.episodes.items[0]);
+            } catch (error) {
+                console.error("Error: ", error);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchEpisodes();
+    }, []);
 
     return (
         <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-2xl dark:bg-gray-800">
@@ -17,7 +35,7 @@ export default function SpotifyPodcast() {
                 </iframe>
             )}
 
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-4 gap-y-2">
                 {episodes.map((episode) => (
                     <li
                         key={episode.id}

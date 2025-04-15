@@ -44,12 +44,12 @@ const imageLinks = [
 
 const layout = [
     [
-        { type: 'chart', span: 2, src: null, link: null },
-        { type: 'image', span: 1, src: chessboardImages[0], link: imageLinks[0] }
-    ],
-    [
         { type: 'image', span: 1, src: chessboardImages[1], link: imageLinks[1] },
         { type: 'image', span: 2, src: null, link: null }
+    ],
+    [
+        { type: 'chart', span: 2, src: null, link: null },
+        { type: 'image', span: 1, src: chessboardImages[0], link: imageLinks[0] }
     ],
     [
         { type: 'image', span: 1, src: chessboardImages[3], link: imageLinks[3] },
@@ -83,13 +83,9 @@ export default function Chessboard() {
     const { t } = useTranslation();
     const [visibleRows, setVisibleRows] = useState(4);
 
-    const loadMoreRows = () => {
-        setVisibleRows((prev) => prev + 4);
-    };
-
     return (
         <>
-            <div className="flex justify-center space-x-2 mb-3 pt-16 pl-4">
+            <div className="flex justify-center gap-x-2 mb-3 pt-16 pl-4">
                 <a href="#" className="btn-b rounded-full !px-5">{t("events")}</a>
                 <Link href="/podcast" className="btn-b rounded-full !px-5">{t("podcast")}</Link>
                 <a href="#" className="btn-b rounded-full !px-5">{t("projects")}</a>
@@ -118,14 +114,24 @@ export default function Chessboard() {
                 )}
             </div>
 
-            <div className="flex justify-center mt-4">
-                {visibleRows < layout.length && (
-                    <button onClick={loadMoreRows} className="font-bold">
-                        {t("load-more")}
-                    </button>
-                )}
+            <div className="flex mb-12">
+                <button
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    className="btn-w ml-5"
+                >
+                    <img src={"icons/back-top-light.png"} className="icon-style-opposite !w-6 !h-6" />
+                    <span>{t("top")}</span>
+                </button>
+                <div className="mt-1.5 ml-60">
+                    {visibleRows < layout.length && (
+                        <button
+                            onClick={() => setVisibleRows(prev => prev + 4)}
+                            className="font-bold">
+                            {t("load-more")}
+                        </button>
+                    )}
+                </div>
             </div>
-            <div className="mb-16"></div>
         </>
     );
 }
