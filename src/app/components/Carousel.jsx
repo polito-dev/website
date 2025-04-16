@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import DarkModeSwitch from "./DarkModeSwitch";
 import LanguageSelector from "./LanguageSelector";
 import Link from "next/link";
 
-export const carouselImages = [
+const carouselImages = [
     "/bitpolito-bitgen-3.jpg",
     "/bitpolito-missione-praga.png",
     "/DRAFT-bitpolito-panel-mining.jpg",
@@ -22,6 +22,11 @@ export default function Carousel() {
     const [fade, setFade] = useState(true);
     const [arrowsVisible, setArrowsVisible] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    // to make the carousel swipeable on mobile and on desktop
+    const startX = useRef(0);
+    const isDragging = useRef(false);
+    const hasMoved = useRef(false);
+    const threshold = 50;
 
     const descriptionImages = [
         t("alt-img-1"),
@@ -67,11 +72,7 @@ export default function Carousel() {
 
     // Disable scrolling when the popup is open
     useEffect(() => {
-        if (isOpen) {
-            document.body.classList.add("overflow-hidden");
-        } else {
-            document.body.classList.remove("overflow-hidden");
-        }
+        (isOpen) ? document.body.classList.add("overflow-hidden") : document.body.classList.remove("overflow-hidden");
 
         return () => {
             document.body.classList.remove("overflow-hidden");
@@ -86,6 +87,27 @@ export default function Carousel() {
                 <br />
             </span>
         ));
+
+    // Swipable carousel
+    const handleStart = (x) => {
+        startX.current = x;
+        isDragging.current = true;
+        hasMoved.current = false;
+    };
+
+    const handleMove = (x) => {
+        if (!isDragging.current) return;
+        const difference = x - startX.current;
+
+        if (Math.abs(difference) > threshold && !hasMoved.current) {
+            hasMoved.current = true;
+            (difference > 0) ? changeImage(-1) : changeImage(1);
+        }
+    };
+
+    const handleEnd = () => {
+        isDragging.current = false;
+    };
 
     return (
         <div className="flex-1 flex flex-col items-center justify-center w-full">
@@ -122,8 +144,19 @@ export default function Carousel() {
                     <img
                         src={carouselImages[currentImage]}
                         title={descriptionImages[currentImage]}
-                        className={`max-w-full w-full transition-opacity duration-700 ease-in-out ${fade ? 'opacity-100' : 'opacity-0'}`}
-                        style={{ height: '400px', objectFit: 'cover' }}
+                        className={`max-w-full w-full h-[400px] object-cover transition-opacity duration-700 ease-in-out ${fade ? 'opacity-100' : 'opacity-0'} cursor-grab active:cursor-grabbing`}
+                        // for mobile / tablet
+                        onTouchStart={(e) => handleStart(e.touches[0].clientX)}
+                        onTouchMove={(e) => handleMove(e.touches[0].clientX)}
+                        onTouchEnd={handleEnd}
+                        // for desktop
+                        onMouseDown={(e) => handleStart(e.clientX)}
+                        onMouseMove={(e) => {
+                            if (isDragging.current) e.preventDefault();
+                            handleMove(e.clientX);
+                        }}
+                        onMouseUp={handleEnd}
+                        onMouseLeave={handleEnd}
                     />
                 </a>
                 <button
