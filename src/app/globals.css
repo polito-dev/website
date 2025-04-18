@@ -63,3 +63,7 @@ body {
 .chessboard {
   @apply w-full h-full object-cover border-2 border-blue-dark rounded-2xl transition-all duration-500 ease-in-out hover:opacity-95 hover:scale-105 dark:border-white;
 }
+
+.footer {
+  @apply w-full bg-blue-dark dark:bg-white text-white dark:text-blue-dark font-bold flex flex-col items-center justify-center bottom-0 left-0 p-4;
+}

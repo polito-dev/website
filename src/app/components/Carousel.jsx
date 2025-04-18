@@ -124,17 +124,17 @@ export default function Carousel() {
                 <a href="#" className="transition-all duration-200 hover:scale-105 font-bold">{t("about")}</a>
             </div>
 
-            <div className="w-full h-1 bg-white dark:bg-blue-dark mb-2">
-                <div
-                    className="h-full bg-blue-dark dark:bg-white"
-                    style={{ width: `${progress}%` }}
-                ></div>
-            </div>
-
             <div
                 onMouseEnter={() => showArrows(true)}
                 onMouseLeave={() => showArrows(false)}
             >
+                <div className="w-full h-1 bg-white dark:bg-blue-dark mb-2">
+                    <div
+                        className="h-full bg-blue-dark dark:bg-white"
+                        style={{ width: `${progress}%` }}
+                    ></div>
+                </div>
+
                 <button
                     onClick={() => changeImage(-1)}
                     className={`arrow !left-1 ${arrowsVisible ? 'opacity-100' : 'opacity-0'}`}>

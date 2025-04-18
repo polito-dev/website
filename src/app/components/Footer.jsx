@@ -16,7 +16,7 @@ export default function Footer() {
                 </svg>
             </div>
 
-            <div className="flex justify-center gap-x-7">
+            <div className="flex flex-wrap justify-center gap-7">
                 <a href='mailto: info@bitpolito.it' target="_blank" rel="noopener noreferrer" className="btn-b rounded-md !px-6 !py-6">
                     <img src="icons/bitpolito-icon-mail.svg" className="icon-style"></img>
                     info@bitpolito.it
@@ -27,7 +27,7 @@ export default function Footer() {
                 </a>
             </div>
 
-            <div className="flex justify-center gap-x-7">
+            <div className="flex flex-wrap justify-center gap-7">
                 <a href="https://t.me/BitPolitoForum" target="_blank" rel="noopener noreferrer" className="btn-b rounded-md">
                     <img src="icons/bitpolito-icon-social-telegram.svg" className="icon-style"></img>
                     Telegram
@@ -58,7 +58,7 @@ export default function Footer() {
                 </a>
             </div>
 
-            <div className="flex justify-center gap-x-14">
+            <div className="flex flex-wrap justify-center gap-x-10">
                 <p>Cookie Policy</p>
                 <p>©2025, Bitpolito</p>
                 <p>Privacy Policy</p>

@@ -31,7 +31,7 @@ export default function Podcast() {
         <span>{t("top")}</span>
       </button>
 
-      <div className="w-full bg-blue-dark dark:bg-white text-white dark:text-blue-dark font-bold flex flex-col items-center justify-center bottom-0 left-0 mt-6 p-4">
+      <div className="footer">
         <Footer />
       </div>
     </>
