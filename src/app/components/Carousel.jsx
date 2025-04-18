@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import DarkModeSwitch from "./DarkModeSwitch";
 import LanguageSelector from "./LanguageSelector";
-import Link from "next/link";
+// import Link from "next/link";
 
 const carouselImages = [
     "/bitpolito-bitgen-3.jpg",
@@ -119,9 +119,9 @@ export default function Carousel() {
             </header>
 
             <div className="flex justify-between gap-x-8 mb-3 mt-7">
-                <a href="#" className="transition-all duration-200 hover:scale-105 font-bold">{t("projects")}</a>
-                <Link href="/podcast" className="transition-all duration-200 hover:scale-105 font-bold">{t("podcast")}</Link>
-                <a href="#" className="transition-all duration-200 hover:scale-105 font-bold">{t("about")}</a>
+                <a className="cursor-not-allowed transition-all duration-200 hover:scale-105 font-bold">{t("projects")}</a>
+                <a className="cursor-not-allowed transition-all duration-200 hover:scale-105 font-bold">{t("podcast")}</a>
+                <a className="cursor-not-allowed transition-all duration-200 hover:scale-105 font-bold">{t("about")}</a>
             </div>
 
             <div

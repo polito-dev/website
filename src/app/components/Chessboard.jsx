@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import Link from "next/link";
+// import Link from "next/link";
 
 const chessboardImages = [
     "chessboard/bitpolito-post-sindaco-lugano.jpg",
@@ -86,10 +86,10 @@ export default function Chessboard() {
     return (
         <>
             <div className="flex justify-center gap-x-2 mb-3 pt-16 pl-4">
-                <a href="#" className="btn-b rounded-full !px-5">{t("events")}</a>
-                <Link href="/podcast" className="btn-b rounded-full !px-5">{t("podcast")}</Link>
-                <a href="#" className="btn-b rounded-full !px-5">{t("projects")}</a>
-                <a href="#" className="btn-b rounded-full !px-5">{t("others")}</a>
+                <a className="cursor-not-allowed btn-b rounded-full !px-5">{t("events")}</a>
+                <a className="cursor-not-allowed btn-b rounded-full !px-5">{t("podcast")}</a>
+                <a className="cursor-not-allowed btn-b rounded-full !px-5">{t("projects")}</a>
+                <a className="cursor-not-allowed btn-b rounded-full !px-5">{t("others")}</a>
             </div>
 
             <div className="grid grid-cols-3 gap-4 p-5 w-full max-w-5xl mx-auto">
