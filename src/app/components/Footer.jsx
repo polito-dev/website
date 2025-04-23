@@ -1,5 +1,29 @@
 import { useTranslation } from "react-i18next";
 
+/**
+ * Footer component that renders the footer section of the website.
+ * 
+ * This component includes:
+ * - A logo image.
+ * - Contact and application links.
+ * - Social media links for various platforms (Telegram, LinkedIn, X (Twitter), Instagram, YouTube, Spotify, GitHub).
+ * - Footer text with Cookie Policy, Privacy Policy, and copyright information.
+ * 
+ * @component
+ * @returns {JSX.Element} The rendered Footer component.
+ * @author BitPolito Team : polito-dev
+ * @version 1.0.0
+ * @example <Footer />
+ * 
+ * @description Footer component for the BitPolito website. 
+ *              Displays contact links, social media links and legal information.
+ * 
+ * @dependencies 
+ * - 'useTranslation': React hook for internationalization (multiple language support).
+ * 
+ * @function
+ * @name Footer
+ */
 export default function Footer() {
     const { t } = useTranslation();
 
