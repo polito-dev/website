@@ -86,10 +86,12 @@ export default function Chessboard() {
     return (
         <>
             <div className="flex justify-center gap-x-2 mb-3 pt-16 pl-4">
-                <a className="cursor-not-allowed btn-b rounded-full !px-5">{t("events")}</a>
-                <a className="cursor-not-allowed btn-b rounded-full !px-5">{t("podcast")}</a>
-                <a className="cursor-not-allowed btn-b rounded-full !px-5">{t("projects")}</a>
-                <a className="cursor-not-allowed btn-b rounded-full !px-5">{t("others")}</a>
+                {["events", "podcast", "projects", "others"].map((key) => (
+                    <div key={key} className="relative group">
+                        <a className="cursor-not-allowed btn-b rounded-full !px-5">{t(key)}</a>
+                        <div className="coming-soon">{t("coming-soon")}</div>
+                    </div>
+                ))}
             </div>
 
             <div className="grid grid-cols-3 gap-4 p-5 w-full max-w-5xl mx-auto">

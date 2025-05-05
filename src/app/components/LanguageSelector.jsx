@@ -47,7 +47,7 @@ export default function LanguageSelector() {
             </button>
 
             {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-blue-dark rounded shadow-lg">
+                <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-blue-dark rounded shadow-lg z-50 opacity-100">
                     <ul className="py-1">
                         {languages.map((lang) => (
                             <li key={lang.code}>

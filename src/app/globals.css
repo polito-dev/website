@@ -67,3 +67,7 @@ body {
 .footer {
   @apply w-full bg-blue-dark dark:bg-white text-white dark:text-blue-dark font-bold flex flex-col items-center justify-center bottom-0 left-0 p-4;
 }
+
+.coming-soon {
+  @apply absolute left-1/2 top-full mt-2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-all duration-300 bg-blue-dark text-white text-sm font-bold px-3 py-2 rounded-lg shadow-lg z-10 whitespace-nowrap opacity-0 group-hover:opacity-100 dark:bg-white dark:text-blue-dark;
+}

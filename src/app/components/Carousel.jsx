@@ -119,9 +119,12 @@ export default function Carousel() {
             </header>
 
             <div className="flex justify-between gap-x-8 mb-3 mt-7">
-                <a className="cursor-not-allowed transition-all duration-200 hover:scale-105 font-bold">{t("projects")}</a>
-                <a className="cursor-not-allowed transition-all duration-200 hover:scale-105 font-bold">{t("podcast")}</a>
-                <a className="cursor-not-allowed transition-all duration-200 hover:scale-105 font-bold">{t("about")}</a>
+                {["projects", "podcast", "about"].map((key) => (
+                    <div key={key} className="relative group">
+                        <a className="cursor-not-allowed transition-all duration-200 hover:scale-105 font-bold">{t(key)}</a>
+                        <div className="coming-soon">{t("coming-soon")}</div>
+                    </div>
+                ))}
             </div>
 
             <div
