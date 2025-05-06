@@ -48,7 +48,7 @@ const layout = [
         { type: 'image', span: 2, src: null, link: null }
     ],
     [
-        { type: 'chart', span: 2, src: null, link: null },
+        { type: 'image', span: 2, src: null, link: null },
         { type: 'image', span: 1, src: chessboardImages[0], link: imageLinks[0] }
     ],
     [
@@ -97,7 +97,7 @@ export default function Chessboard() {
                     row.map((item, colIndex) => (
                         <div
                             key={`${rowIndex}-${colIndex}`}
-                            className={`${item.span === 2 ? 'col-span-2' : 'col-span-1'} h-100`}
+                            className={`${item.span === 2 ? 'col-span-2' : 'col-span-1'}`}
                         >
                             {item.type === 'chart' ? (
                                 <img src="#" className="chessboard"></img>
