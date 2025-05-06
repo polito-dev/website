@@ -48,7 +48,7 @@ const layout = [
         { type: 'image', span: 2, src: null, link: null }
     ],
     [
-        { type: '', span: 2, src: null, link: null },
+        { type: 'image', span: 2, src: null, link: null },
         { type: 'image', span: 1, src: chessboardImages[0], link: imageLinks[0] }
     ],
     [
