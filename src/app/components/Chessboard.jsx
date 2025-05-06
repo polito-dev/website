@@ -89,7 +89,6 @@ export default function Chessboard() {
                 {["events", "podcast", "projects", "others"].map((key) => (
                     <div key={key} className="relative group">
                         <a className="cursor-not-allowed btn-b rounded-full !px-5">{t(key)}</a>
-                        <div className="coming-soon">{t("coming-soon")}</div>
                     </div>
                 ))}
             </div>
