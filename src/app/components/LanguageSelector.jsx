@@ -47,13 +47,13 @@ export default function LanguageSelector() {
             </button>
 
             {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-blue-dark rounded shadow-lg">
+                <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-blue-dark rounded shadow-lg z-50 opacity-100">
                     <ul className="py-1">
                         {languages.map((lang) => (
                             <li key={lang.code}>
                                 <button
                                     onClick={() => changeLanguage(lang.code)}
-                                    className="block w-full px-4 py-2 text-left hover:bg-gray-200 dark:hover:bg-gray-400"
+                                    className="block w-full px-4 py-2 text-left rounded-3xl hover:bg-gray-200 dark:hover:bg-gray-400"
                                 >
                                     {lang.name}
                                 </button>
