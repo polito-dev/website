@@ -39,7 +39,7 @@ export default function HomePage() {
         "
       >
         <header className="flex justify-between gap-7">
-          <img src="bitpolito-logo-light.png" className="icon-style-opposite !w-fit !h-fit !mr-0 pt-3 pl-4 mt-4"></img>
+          <img src="bitpolito-logo-light.svg" className="icon-style-opposite !w-fit !h-fit !mr-0 pt-3 pl-4 mt-4"></img>
           {/* only for mobile and tablet version */}
           <div className="flex flex-col items-center gap-4 mt-8 lg:hidden block">
             <DarkModeSwitch />
