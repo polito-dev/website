@@ -2,6 +2,10 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 // import Link from "next/link";
 
+/**
+ * @constant {string[]} chessboardImages
+ * @description Array of image paths for the chessboard
+ */
 const chessboardImages = [
     "chessboard/bitpolito-post-sindaco-lugano.jpg",
     "chessboard/bitpolito-post-mastering-lightning.jpg",
@@ -22,6 +26,10 @@ const chessboardImages = [
     "chessboard/bitpolito-opensource-post-scaling-bitcoin.jpg"
 ];
 
+/**
+ * @constant {string[]} imageLinks
+ * @description URLs that each chessboard image links to when clicked
+ */
 const imageLinks = [
     "https://www.instagram.com/p/Csd0MmFtisC/",
     "https://www.amazon.it/Mastering-Lightning-Network-Protocollo-Istantanei-ebook/dp/B0BSRB3BG1/ref=sr_1_1?crid=FG4OGKEIRC4T&dib=eyJ2IjoiMSJ9.9g0Ezn3vK9ozcoRV-A12Zj0laHh7zZnez9WdEeHr6XzIfTlCRRzb9IHhIP0m2kRwJgnw-rLIjP0qwJ6ScK6AW66JLnoqzWXOUCLY7qBAuGqUtfp6q9HQwDHLn__z8ubyexAwYSVwU9ocn9ETqRKIleYmTFTFE2FQUmMfwnxthi-p-Nww7K19OOmVHs0u69vN.QGE7-HwChTv4lYX88ff5kU_lMtZZMHjIAxGaiKIXn-k&dib_tag=se&keywords=mastering+lightning+network&nsdOptOutParam=true&qid=1736418758&sprefix=mastering+light%2Caps%2C397&sr=8-1",
@@ -42,6 +50,11 @@ const imageLinks = [
     "https://www.instagram.com/p/DCpKJ0-oJuk/"
 ];
 
+/**
+ * @constant {Array[]} layout
+ * @description Array representing the layout of the chessboard. Each row contains an array of objects defining
+ * the type of content, the span, the image source and the link associated with the image
+ */
 const layout = [
     [
         { type: 'image', span: 1, src: chessboardImages[1], link: imageLinks[1] },
@@ -79,8 +92,33 @@ const layout = [
     ]
 ];
 
+/**
+ * Chessboard component renders a grid layout with dynamic rows and interactive elements.
+ * It includes a grid of items and a "Load More" button to display additional rows.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered Chessboard component.
+ * @author BitPolito Team : polito-dev
+ * @version 1.0.0
+ * @example <Chessboard />
+ *
+ * @description
+ * - The component displays a grid of images and charts in a responsive layout.
+ * - The "Load More" button allows users to reveal more rows (4) of items dynamically.
+ *  
+ * @dependencies
+ * - 'useTranslation': React hook for internationalization (multiple language support).
+ *
+ * @function
+ * @name Chessboard
+ */
 export default function Chessboard() {
     const { t } = useTranslation();
+
+    /**
+     * @state {number} visibleRows
+     * @description The number of rows to be displayed in the chessboard
+     */
     const [visibleRows, setVisibleRows] = useState(4);
 
     return (
