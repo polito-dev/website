@@ -122,29 +122,48 @@ export default function Chessboard() {
     const [visibleRows, setVisibleRows] = useState(4);
 
     return (
-        <>
-            <div className="flex justify-center gap-x-2 mb-3 pt-16 pl-4">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Filter buttons */}
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-x-3 mb-3 pt-8 sm:pt-12 lg:pt-16">
                 {["events", "podcast", "projects", "others"].map((key) => (
                     <div key={key} className="relative group">
-                        <a className="cursor-not-allowed btn-b rounded-full !px-5">{t(key)}</a>
+                        <a className="cursor-not-allowed btn-b rounded-full px-3 sm:px-5 text-sm sm:text-base">
+                            {t(key)}
+                        </a>
                     </div>
                 ))}
             </div>
 
-            <div className="grid grid-cols-3 gap-4 p-5 w-full max-w-5xl mx-auto">
+            {/* Chessboard grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5 p-2 sm:p-4 lg:p-5">
                 {layout.slice(0, visibleRows).flatMap((row, rowIndex) =>
                     row.map((item, colIndex) => (
                         <div
                             key={`${rowIndex}-${colIndex}`}
-                            className={`${item.span === 2 ? 'col-span-2' : 'col-span-1'}`}
+                            className={`${
+                                item.span === 2 
+                                    ? 'col-span-1 sm:col-span-2' 
+                                    : 'col-span-1'
+                            } aspect-square sm:aspect-[4/3] transition-transform hover:scale-[1.02]`}
                         >
                             {item.type === 'chart' ? (
-                                <img src="#" className="chessboard"></img>
+                                <img 
+                                    src="#" 
+                                    alt="Chart placeholder"
+                                    className="chessboard w-full h-full object-cover rounded-lg shadow-sm"
+                                />
                             ) : (
-                                <a href={item.link} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
+                                <a 
+                                    href={item.link} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    className="block w-full h-full"
+                                >
                                     <img
                                         src={item.src}
-                                        className="chessboard"
+                                        alt={`Chessboard item ${rowIndex}-${colIndex}`}
+                                        className="chessboard w-full h-full object-cover rounded-lg shadow-sm transition-all hover:shadow-md"
+                                        loading="lazy"
                                     />
                                 </a>
                             )}
@@ -153,24 +172,29 @@ export default function Chessboard() {
                 )}
             </div>
 
-            <div className="flex mb-12">
+            {/* Navigation buttons */}
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 px-4 py-8 sm:py-12">
                 <button
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                    className="btn-w ml-5"
+                    className="btn-w flex items-center gap-2"
                 >
-                    <img src={"icons/back-top-light.png"} className="icon-style-opposite !w-6 !h-6" />
+                    <img 
+                        src="/icons/back-top-light.png" 
+                        alt="Back to top"
+                        className="icon-style-opposite w-5 h-5 sm:w-6 sm:h-6" 
+                    />
                     <span>{t("top")}</span>
                 </button>
-                <div className="mt-1.5 ml-60">
-                    {visibleRows < layout.length && (
-                        <button
-                            onClick={() => setVisibleRows(prev => prev + 4)}
-                            className="font-bold">
-                            {t("load-more")}
-                        </button>
-                    )}
-                </div>
+                
+                {visibleRows < layout.length && (
+                    <button
+                        onClick={() => setVisibleRows(prev => prev + 4)}
+                        className="font-bold hover:opacity-80 transition-opacity"
+                    >
+                        {t("load-more")}
+                    </button>
+                )}
             </div>
-        </>
+        </div>
     );
 }

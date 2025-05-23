@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import Image from "next/image";
 import "./i18n/i18n";
 import Carousel from "./components/Carousel";
 import Footer from "./components/Footer";
@@ -30,37 +31,51 @@ export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-      <div
-        className="
-        sm:pr-2 sm:mr-0 sm:ml-0 sm:break-words
+      <div className="
+        px-4 sm:px-6 lg:px-8
+        sm:mr-0 sm:ml-0 sm:break-words
         lg:flex-1 lg:overflow-y-auto lg:min-h-screen
         lg:pr-20 lg:pl-2 lg:break-words lg:mr-[350px]
         text-sm sm:text-base
-        "
-      >
-        <header className="flex justify-between gap-7">
-          <img src="bitpolito-logo-light.svg" className="icon-style-opposite !w-fit !h-fit !mr-0 pt-3 pl-4 mt-4"></img>
+      ">
+        <header className="flex justify-between items-center gap-4 sm:gap-7 max-w-7xl mx-auto pt-4 sm:pt-6">
+          <div className="relative w-[334px] sm:w-[160px] md:w-[200px] lg:w-[334px]">
+            <Image
+              src="/bitpolito-logo-light.svg"
+              alt="Bitpolito Logo"
+              width={334}
+              height={57}
+              priority
+              className="icon-style-opposite w-full h-auto"
+            />
+          </div>
+          
           {/* only for mobile and tablet version */}
-          <div className="flex flex-col items-center gap-4 mt-8 lg:hidden block">
+          <div className="flex flex-col items-center gap-3 sm:gap-4 lg:hidden">
             <DarkModeSwitch />
             <LanguageSelector />
           </div>
         </header>
 
-        <h1 className="text-8xl my-2 mt-16 ml-4">{t("title")}</h1>
-        <h1 className="text-xl my-2 mt-3 ml-4">{t("paragraph")}</h1>
-
-        {/* only for mobile and tablte version */}
-        <div className="sm:hidden">
-          <Carousel />
+        <div className="max-w-7xl mx-auto mt-8 sm:mt-12 md:mt-16 lg:mt-20 px-4">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight mb-6">
+            {t("title")}
+          </h1>
+          
+          <div className="max-w-prose">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed tracking-wide
+               w-full sm:w-[85%] md:w-[75%] lg:w-[65%] xl:w-[60%]">
+              {t("paragraph")}
+            </p>
+          </div>
         </div>
 
-        <div className="flex">
+        <div className="flex mt-8 sm:mt-12">
           <div ref={chessboardRef}>
             <Chessboard />
           </div>
 
-          <div className={`sm:block hidden w-[400px] h-full p-2 ml-auto transition-all duration-300 top-0 right-0 ${isCarouselFixed ? "fixed" : "absolute"}`}>
+          <div className={`lg:block hidden w-[400px] h-full p-2 ml-auto transition-all duration-300 top-0 right-0 ${isCarouselFixed ? "fixed" : "absolute"}`}>
             <Carousel />
           </div>
         </div>
