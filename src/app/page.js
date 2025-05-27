@@ -39,14 +39,14 @@ export default function HomePage() {
         text-sm sm:text-base
       ">
         <header className="flex justify-between items-center gap-4 sm:gap-7 max-w-7xl mx-auto pt-4 sm:pt-6">
-          <div className="relative w-[334px] sm:w-[160px] md:w-[200px] lg:w-[334px]">
+          <div className="relative w-[334px] sm:w-[160px] md:w-[200px] lg:w-[334px] mt-[20px] ml-[50px]">
             <Image
               src="/bitpolito-logo-light.svg"
               alt="Bitpolito Logo"
               width={334}
               height={57}
               priority
-              className="icon-style-opposite w-full h-auto"
+              className="icon-style-opposite !w-full !h-auto"
             />
           </div>
           
@@ -57,7 +57,7 @@ export default function HomePage() {
           </div>
         </header>
 
-        <div className="max-w-7xl mx-auto mt-8 sm:mt-12 md:mt-16 lg:mt-20 px-4">
+        <div className="max-w-7xl mx-auto mt-8 sm:mt-12 md:mt-16 lg:mt-20 ml-[50px]">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight mb-6">
             {t("title")}
           </h1>
