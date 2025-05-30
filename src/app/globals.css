@@ -4,7 +4,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0000ff;
+    --background: bg-blue-dark;
     --foreground: #ffffff;
   }
 }
@@ -22,23 +22,19 @@ body {
 }
 
 .btn-w {
-  @apply rounded-md border border-blue-dark text-blue-dark;
-  background-color: white;
+  @apply rounded-md border border-blue-dark text-blue-dark bg-white;
 }
 
 .dark .btn-w {
-  @apply border-white text-white;
-  background-color: blue;
+  @apply border border-white text-white bg-blue-dark;
 }
 
 .btn-b {
-  @apply border text-white;
-  background-color: blue;
+  @apply border border-white text-white bg-blue-dark;
 }
 
 .dark .btn-b {
-  @apply border-blue-dark text-blue-dark;
-  background-color: white;
+  @apply border border-blue-dark text-blue-dark bg-white;
 }
 
 @layer utilities {
