@@ -1,73 +1,55 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 // import Link from "next/link";
 import chessboardImages from '../data/chessboardImages.json';
 
+const chartRow = [
+    { type: 'image', span: 1 },
+    { type: 'chart', span: 2, src: null, link: null }
+];
+
+const row1 = [
+    { type: 'image', span: 1 },
+    { type: 'box', span: 2, src: null, link: null }
+];
+
+const row2 = [
+    { type: 'image', span: 1 },
+    { type: 'image', span: 1 },
+    { type: 'image', span: 1 }
+];
+
+const row3 = [
+    { type: 'box', span: 2, src: null, link: null },
+    { type: 'image', span: 1 }
+];
+
 /**
- * @constant {Array[]} layout
- * @description Array representing the layout of the chessboard. Each row contains an array of objects defining
- * the type of content, the span, the image source and the link associated with the image
+ * @constant {Array[]} layoutTemplate
+ * @description 
+ * An array representing the layout template of chessboard. Each "page" 
+ * is composed of rows (chartRow, row1, row2, row3), which are repeated across multiple pages.
+ * 
  */
-const layout = [
-    [ // page 1
-        { type: 'image', span: 1, src: chessboardImages[0].src, link: chessboardImages[0].link },
-        { type: 'image', span: 2, src: null, link: null }
-    ],
-    [
-        { type: 'image', span: 1, src: chessboardImages[2].src, link: chessboardImages[2].link },
-        { type: 'image', span: 1, src: chessboardImages[3].src, link: chessboardImages[3].link },
-        { type: 'image', span: 1, src: chessboardImages[4].src, link: chessboardImages[4].link }
-    ],
-    [
-        { type: 'image', span: 2, src: null, link: null },
-        { type: 'image', span: 1, src: chessboardImages[6].src, link: chessboardImages[6].link }
-    ],
-    [
-        { type: 'image', span: 1, src: chessboardImages[7].src, link: chessboardImages[7].link },
-        { type: 'image', span: 2, src: null, link: null }
-    ],
-    [ // page 2
-        { type: 'image', span: 1, src: chessboardImages[9].src, link: chessboardImages[9].link },
-        { type: 'image', span: 2, src: null, link: null }
-    ],
-    [
-        { type: 'image', span: 1, src: chessboardImages[11].src, link: chessboardImages[11].link },
-        { type: 'image', span: 1, src: chessboardImages[12].src, link: chessboardImages[12].link },
-        { type: 'image', span: 1, src: chessboardImages[13].src, link: chessboardImages[13].link }
-    ],
-    [
-        { type: 'image', span: 2, src: null, link: null },
-        { type: 'image', span: 1, src: chessboardImages[15].src, link: chessboardImages[15].link }
-    ],
-    [
-        { type: 'image', span: 1, src: chessboardImages[16].src, link: chessboardImages[16].link },
-        { type: 'image', span: 2, src: null, link: null }
-    ],
-    [ // page 3
-        { type: 'image', span: 1, src: chessboardImages[18].src, link: chessboardImages[18].link },
-        { type: 'image', span: 2, src: null, link: null }
-    ],
-    [
-        { type: 'image', span: 1, src: chessboardImages[20].src, link: chessboardImages[20].link },
-        { type: 'image', span: 1, src: chessboardImages[21].src, link: chessboardImages[21].link },
-        { type: 'image', span: 1, src: chessboardImages[22].src, link: chessboardImages[22].link }
-    ],
-    [
-        { type: 'image', span: 2, src: null, link: null },
-        { type: 'image', span: 1, src: chessboardImages[24].src, link: chessboardImages[24].link }
-    ],
-    [
-        { type: 'image', span: 1, src: chessboardImages[25].src, link: chessboardImages[25].link },
-        { type: 'image', span: 2, src: null, link: null }
-    ],
-    [ // page 4
-        { type: 'image', span: 1, src: chessboardImages[27].src, link: chessboardImages[27].link },
-        { type: 'image', span: 2, src: null, link: null }
-    ],
-    [
-        { type: 'image', span: 2, src: null, link: null },
-        { type: 'image', span: 1, src: chessboardImages[30].src, link: chessboardImages[30].link }
-    ]
+const layoutTemplate = [
+    // page 1
+    chartRow,
+    row2,
+    row3,
+    row1,
+    // page 2
+    row1,
+    row2,
+    row3,
+    row1,
+    // page 3
+    row1,
+    row2,
+    row3,
+    row1,
+    // page 4
+    row1,
+    row3
 ];
 
 /**
@@ -99,6 +81,53 @@ export default function Chessboard() {
      */
     const [visibleRows, setVisibleRows] = useState(4);
 
+    /**
+     * @constant {Array[]} layout
+     * @description Array representing the layout of the chessboard. Each row contains an array of objects defining
+     * the type of content, the span, the image source and the link associated with the image
+     */
+    const [layout, setLayout] = useState([]);
+
+    /**
+     * Populates the layout with random images from `chessboardImages`.
+     * 
+     * This function takes the predefined `layoutTemplate` and fills the "image" type slots with 
+     * random images from the `chessboardImages` array. The images are selected randomly, and their 
+     * `src` and `link` properties are assigned to the corresponding slots in the layout.
+     * 
+     * @function populateLayout
+     * @returns {Array[]} - a new array representing the layout
+     */
+    function populateLayout() {
+        const images = chessboardImages.sort(() => 0.5 - Math.random());
+
+        let imageIndex = 0;
+        return layoutTemplate.map(row =>
+            row.map(item => {
+                if (item.type === 'image') {
+                    const img = images[imageIndex++];
+                    return { ...item, src: img.src, link: img.link };
+                }
+                return item;
+            })
+        );
+    }
+
+    /**
+     * @hook useEffect
+     * @description 
+     * Runs once when the component mounts. It uses the `populateLayout` function to fill the layout with random 
+     * images and then updates the state with the populated layout.
+     * 
+     * The layout is populated using the `layoutTemplate` and `chessboardImages` (external data) passed to `populateLayout`.
+     * 
+     * This hook does not depend on any state or props (hence the empty dependency array), meaning it runs only 
+     * once when the component mounts and will not trigger on subsequent re-renders.
+     */
+    useEffect(() => {
+        setLayout(populateLayout());
+    }, []);
+
     return (
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Filter buttons */}
@@ -121,29 +150,47 @@ export default function Chessboard() {
                             className={`${item.span === 2
                                 ? 'col-span-1 sm:col-span-2'
                                 : 'col-span-1'
-                                } transition-all duration-300 ease-in-out hover:opacity-95 hover:scale-[1.02] min-h-[350px]`}
+                                } transition-all duration-300 ease-in-out hover:opacity-95 hover:scale-[1.02]`}
                         >
-                            {item.type === 'chart' ? (
-                                <img
-                                    src="#"
-                                    alt="Chart placeholder"
-                                    className="chessboard"
-                                />
-                            ) : (
-                                <a
-                                    href={item.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="block w-full h-full"
-                                >
-                                    <img
-                                        src={item.src}
-                                        alt={`Chessboard item ${rowIndex}-${colIndex}`}
-                                        className="chessboard"
-                                        loading="lazy"
-                                    />
-                                </a>
-                            )}
+                            {(() => {
+                                switch (item.type) {
+                                    case 'chart':
+                                        return (
+                                            <img
+                                                src="#"
+                                                alt="Chart placeholder"
+                                                className="chessboard !min-h-[200px]"
+                                            />
+                                        );
+                                    case 'box':
+                                        return (
+                                            <div className="chessboard relative !min-h-[200px]">
+                                                <h1 className="text-base sm:text-xl md:text-2xl lg:text-4xl ml-4 mt-4">Project</h1>
+                                                <div className="flex absolute gap-2 bottom-4 ml-4">
+                                                    <button className="cursor-not-allowed btn-b rounded-full px-3 sm:px-5 text-sm sm:text-base">Tag 1</button>
+                                                    <button className="cursor-not-allowed btn-b rounded-full px-3 sm:px-5 text-sm sm:text-base">Tag 2</button>
+                                                    <button className="cursor-not-allowed btn-b rounded-full px-3 sm:px-5 text-sm sm:text-base">Tag 3</button>
+                                                </div>
+                                            </div>
+                                        );
+                                    default:
+                                        return (
+                                            <a
+                                                href={item.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="block w-full h-full"
+                                            >
+                                                <img
+                                                    src={item.src}
+                                                    alt={`Chessboard item ${rowIndex}-${colIndex}`}
+                                                    className="chessboard"
+                                                    loading="lazy"
+                                                />
+                                            </a>
+                                        );
+                                }
+                            })()}
                         </div>
                     ))
                 )}

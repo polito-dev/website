@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import Image from "next/image";
 import "./i18n/i18n";
 import Carousel from "./components/Carousel";
 import Footer from "./components/Footer";
@@ -40,12 +39,11 @@ export default function HomePage() {
       ">
         <header className="flex justify-between items-center gap-4 sm:gap-7 max-w-7xl mx-auto pt-4 sm:pt-6">
           <div className="relative w-[334px] sm:w-[160px] md:w-[200px] lg:w-[334px] mt-[20px] ml-[50px]">
-            <Image
+            <img
               src="/bitpolito-logo-light.svg"
               alt="Bitpolito Logo"
               width={334}
               height={57}
-              priority
               className="icon-style-opposite !w-full !h-auto"
             />
           </div>
