@@ -1,95 +1,55 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 // import Link from "next/link";
+import chessboardImages from '../data/chessboardImages.json';
 
-/**
- * @constant {string[]} chessboardImages
- * @description Array of image paths for the chessboard
- */
-const chessboardImages = [
-    "chessboard/bitpolito-post-sindaco-lugano.jpg",
-    "chessboard/bitpolito-post-mastering-lightning.jpg",
-    "#",
-    "chessboard/bitpolito-post-capire-bitcoin.jpg",
-    "chessboard/bitpolito-opensource-post-discovering-bitcoin.jpg",
-    "chessboard/bitpolito-opensource-post-custodire-bitcoin.jpg",
-    "#",
-    "chessboard/bitpolito-post-pizza-day-gridless.jpg",
-    "#",
-    "chessboard/bitpolito-opensource-post-bitcoin-everyday.jpg",
-    "chessboard/bitpolito-post-zbd.jpg",
-    "#",
-    "chessboard/bitpolito-post-todd.jpg",
-    "chessboard/bitpolito-post-corso-bitcoin.jpg",
-    "chessboard/bitpolito-opensource-post-teoria-dei-giochi.jpg",
-    "#",
-    "chessboard/bitpolito-opensource-post-scaling-bitcoin.jpg"
+const chartRow = [
+    { type: 'image', span: 1 },
+    { type: 'chart', span: 2, src: null, link: null }
+];
+
+const row1 = [
+    { type: 'image', span: 1 },
+    { type: 'box', span: 2, src: null, link: null }
+];
+
+const row2 = [
+    { type: 'image', span: 1 },
+    { type: 'image', span: 1 },
+    { type: 'image', span: 1 }
+];
+
+const row3 = [
+    { type: 'box', span: 2, src: null, link: null },
+    { type: 'image', span: 1 }
 ];
 
 /**
- * @constant {string[]} imageLinks
- * @description URLs that each chessboard image links to when clicked
+ * @constant {Array[]} layoutTemplate
+ * @description 
+ * An array representing the layout template of chessboard. Each "page" 
+ * is composed of rows (chartRow, row1, row2, row3), which are repeated across multiple pages.
+ * 
  */
-const imageLinks = [
-    "https://www.instagram.com/p/Csd0MmFtisC/",
-    "https://www.amazon.it/Mastering-Lightning-Network-Protocollo-Istantanei-ebook/dp/B0BSRB3BG1/ref=sr_1_1?crid=FG4OGKEIRC4T&dib=eyJ2IjoiMSJ9.9g0Ezn3vK9ozcoRV-A12Zj0laHh7zZnez9WdEeHr6XzIfTlCRRzb9IHhIP0m2kRwJgnw-rLIjP0qwJ6ScK6AW66JLnoqzWXOUCLY7qBAuGqUtfp6q9HQwDHLn__z8ubyexAwYSVwU9ocn9ETqRKIleYmTFTFE2FQUmMfwnxthi-p-Nww7K19OOmVHs0u69vN.QGE7-HwChTv4lYX88ff5kU_lMtZZMHjIAxGaiKIXn-k&dib_tag=se&keywords=mastering+lightning+network&nsdOptOutParam=true&qid=1736418758&sprefix=mastering+light%2Caps%2C397&sr=8-1",
-    "#",
-    "https://www.instagram.com/p/Cl_rlqHtqFW/",
-    "https://www.instagram.com/p/C7j74w0NrN5/",
-    "https://www.instagram.com/p/C6O1cmPtbxe/",
-    "#",
-    "https://www.instagram.com/p/C6tzVJ3tc3F/?img_index=1",
-    "#",
-    "https://www.instagram.com/p/C4-tmUMN3Ow/",
-    "https://www.instagram.com/p/DBwk6grNy9D/",
-    "#",
-    "https://www.instagram.com/p/DBGg-EqojVE/",
-    "#",
-    "https://www.instagram.com/p/C2-fr-btZ1D/",
-    "#",
-    "https://www.instagram.com/p/DCpKJ0-oJuk/"
-];
-
-/**
- * @constant {Array[]} layout
- * @description Array representing the layout of the chessboard. Each row contains an array of objects defining
- * the type of content, the span, the image source and the link associated with the image
- */
-const layout = [
-    [
-        { type: 'image', span: 1, src: chessboardImages[1], link: imageLinks[1] },
-        { type: 'image', span: 2, src: null, link: null }
-    ],
-    [
-        { type: 'image', span: 2, src: null, link: null },
-        { type: 'image', span: 1, src: chessboardImages[0], link: imageLinks[0] }
-    ],
-    [
-        { type: 'image', span: 1, src: chessboardImages[3], link: imageLinks[3] },
-        { type: 'image', span: 1, src: chessboardImages[4], link: imageLinks[4] },
-        { type: 'image', span: 1, src: chessboardImages[5], link: imageLinks[5] }
-    ],
-    [
-        { type: 'image', span: 2, src: null, link: null },
-        { type: 'image', span: 1, src: chessboardImages[7], link: imageLinks[7] }
-    ],
-    [
-        { type: 'image', span: 2, src: null, link: null },
-        { type: 'image', span: 1, src: chessboardImages[9], link: imageLinks[9] }
-    ],
-    [
-        { type: 'image', span: 1, src: chessboardImages[10], link: imageLinks[10] },
-        { type: 'image', span: 2, src: null, link: null }
-    ],
-    [
-        { type: 'image', span: 1, src: chessboardImages[12], link: imageLinks[12] },
-        { type: 'image', span: 1, src: chessboardImages[13], link: imageLinks[13] },
-        { type: 'image', span: 1, src: chessboardImages[14], link: imageLinks[14] }
-    ],
-    [
-        { type: 'image', span: 2, src: null, link: null },
-        { type: 'image', span: 1, src: chessboardImages[16], link: imageLinks[16] }
-    ]
+const layoutTemplate = [
+    // page 1
+    chartRow,
+    row2,
+    row3,
+    row1,
+    // page 2
+    row1,
+    row2,
+    row3,
+    row1,
+    // page 3
+    row1,
+    row2,
+    row3,
+    row1,
+    // page 4
+    row1,
+    row3
 ];
 
 /**
@@ -121,56 +81,152 @@ export default function Chessboard() {
      */
     const [visibleRows, setVisibleRows] = useState(4);
 
+    /**
+     * @constant {Array[]} layout
+     * @description Array representing the layout of the chessboard. Each row contains an array of objects defining
+     * the type of content, the span, the image source and the link associated with the image
+     */
+    const [layout, setLayout] = useState([]);
+
+    /**
+     * Populates the layout with random images from `chessboardImages`.
+     * 
+     * This function takes the predefined `layoutTemplate` and fills the "image" type slots with 
+     * random images from the `chessboardImages` array. The images are selected randomly, and their 
+     * `src` and `link` properties are assigned to the corresponding slots in the layout.
+     * 
+     * @function populateLayout
+     * @returns {Array[]} - a new array representing the layout
+     */
+    function populateLayout() {
+        const images = chessboardImages.sort(() => 0.5 - Math.random());
+
+        let imageIndex = 0;
+        return layoutTemplate.map(row =>
+            row.map(item => {
+                if (item.type === 'image') {
+                    const img = images[imageIndex++];
+                    return { ...item, src: img.src, link: img.link };
+                }
+                return item;
+            })
+        );
+    }
+
+    /**
+     * @hook useEffect
+     * @description 
+     * Runs once when the component mounts. It uses the `populateLayout` function to fill the layout with random 
+     * images and then updates the state with the populated layout.
+     * 
+     * The layout is populated using the `layoutTemplate` and `chessboardImages` (external data) passed to `populateLayout`.
+     * 
+     * This hook does not depend on any state or props (hence the empty dependency array), meaning it runs only 
+     * once when the component mounts and will not trigger on subsequent re-renders.
+     */
+    useEffect(() => {
+        setLayout(populateLayout());
+    }, []);
+
     return (
-        <>
-            <div className="flex justify-center gap-x-2 mb-3 pt-16 pl-4">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Filter buttons */}
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-x-3 mb-3 pt-8 sm:pt-12 lg:pt-16">
                 {["events", "podcast", "projects", "others"].map((key) => (
                     <div key={key} className="relative group">
-                        <a className="cursor-not-allowed btn-b rounded-full !px-5">{t(key)}</a>
+                        <a className="cursor-not-allowed btn-b rounded-full px-3 sm:px-5 text-sm sm:text-base">
+                            {t(key)}
+                        </a>
                     </div>
                 ))}
             </div>
 
-            <div className="grid grid-cols-3 gap-4 p-5 w-full max-w-5xl mx-auto">
+            {/* Chessboard grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5 p-2 sm:p-4 lg:p-5">
                 {layout.slice(0, visibleRows).flatMap((row, rowIndex) =>
                     row.map((item, colIndex) => (
                         <div
                             key={`${rowIndex}-${colIndex}`}
-                            className={`${item.span === 2 ? 'col-span-2' : 'col-span-1'}`}
+                            className={`${item.span === 2
+                                ? 'col-span-1 sm:col-span-2'
+                                : 'col-span-1'
+                                } transition-all duration-300 ease-in-out hover:opacity-95 hover:scale-[1.02]`}
                         >
-                            {item.type === 'chart' ? (
-                                <img src="#" className="chessboard"></img>
-                            ) : (
-                                <a href={item.link} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
-                                    <img
-                                        src={item.src}
-                                        className="chessboard"
-                                    />
-                                </a>
-                            )}
+                            {(() => {
+                                switch (item.type) {
+                                    case 'chart':
+                                        return (
+                                            <img
+                                                src="#"
+                                                alt="Chart placeholder"
+                                                className="chessboard !min-h-[200px]"
+                                            />
+                                        );
+                                    case 'box':
+                                        return (
+                                            <div className="chessboard relative !min-h-[200px]">
+                                                <h1 className="text-base sm:text-xl md:text-2xl lg:text-4xl ml-4 mt-4">Project</h1>
+                                                <div className="flex absolute gap-2 bottom-4 ml-4">
+                                                    <button className="cursor-not-allowed btn-b rounded-full px-3 sm:px-5 text-sm sm:text-base">Tag 1</button>
+                                                    <button className="cursor-not-allowed btn-b rounded-full px-3 sm:px-5 text-sm sm:text-base">Tag 2</button>
+                                                    <button className="cursor-not-allowed btn-b rounded-full px-3 sm:px-5 text-sm sm:text-base">Tag 3</button>
+                                                </div>
+                                            </div>
+                                        );
+                                    default:
+                                        return (
+                                            <a
+                                                href={item.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="block w-full h-full"
+                                            >
+                                                <img
+                                                    src={item.src}
+                                                    alt={`Chessboard item ${rowIndex}-${colIndex}`}
+                                                    className="chessboard"
+                                                    loading="lazy"
+                                                />
+                                            </a>
+                                        );
+                                }
+                            })()}
                         </div>
                     ))
                 )}
             </div>
 
-            <div className="flex mb-12">
+            {/* Navigation buttons */}
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 px-4 py-8 sm:py-12">
                 <button
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                    className="btn-w ml-5"
+                    className="btn-w flex items-center gap-2"
                 >
-                    <img src={"icons/back-top-light.png"} className="icon-style-opposite !w-6 !h-6" />
+                    <img
+                        src="/icons/back-top-light.png"
+                        alt="Back to top"
+                        className="icon-style-opposite w-5 h-5 sm:w-6 sm:h-6"
+                    />
                     <span>{t("top")}</span>
                 </button>
-                <div className="mt-1.5 ml-60">
-                    {visibleRows < layout.length && (
-                        <button
-                            onClick={() => setVisibleRows(prev => prev + 4)}
-                            className="font-bold">
-                            {t("load-more")}
-                        </button>
-                    )}
-                </div>
+
+                {visibleRows < layout.length && (
+                    <button
+                        onClick={() => setVisibleRows(prev => prev + 4)}
+                        className="font-bold hover:opacity-80 transition-opacity"
+                    >
+                        {t("load-more")}
+                    </button>
+                )}
+                {visibleRows >= layout.length && (
+                    <button
+                        onClick={() => setVisibleRows(4)}
+                        className="font-bold hover:opacity-80 transition-opacity"
+                    >
+                        {t("reset")}
+                    </button>
+                )}
             </div>
-        </>
+        </div>
     );
 }

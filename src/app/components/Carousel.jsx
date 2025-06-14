@@ -313,7 +313,7 @@ export default function Carousel() {
                         <p className="text-xl mb-6 dark:text-white">{newLine(t("popup-paragraph"))}</p>
 
                         <div className="flex items-center">
-                            <img src="/bitpolito-foto-presidente.jpg" className="w-60 h-64"></img>
+                            <img src="/FP_PhotoProfile.png" className="w-60 h-64"></img>
                             <div className="flex flex-col ml-12 gap-y-7">
                                 <a href="https://t.me/bitciccio" target="_blank" rel="noopener noreferrer" className="btn-w">
                                     <img src={"icons/bitpolito-icon-social-telegram.svg"} className="icon-style-opposite"></img>
