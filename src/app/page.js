@@ -47,7 +47,7 @@ export default function HomePage() {
               className="icon-style-opposite !w-full !h-auto"
             />
           </div>
-          
+
           {/* only for mobile and tablet version */}
           <div className="flex flex-col items-center gap-3 sm:gap-4 lg:hidden">
             <DarkModeSwitch />
@@ -59,7 +59,7 @@ export default function HomePage() {
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight mb-6">
             {t("title")}
           </h1>
-          
+
           <div className="max-w-prose">
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed tracking-wide
                w-full sm:w-[85%] md:w-[75%] lg:w-[65%] xl:w-[60%]">
@@ -73,7 +73,7 @@ export default function HomePage() {
             <Chessboard />
           </div>
 
-          <div className={`lg:block hidden w-[400px] h-full p-2 ml-auto transition-all duration-300 top-0 right-0 ${isCarouselFixed ? "fixed" : "absolute"}`}>
+          <div className={`bg-white dark:bg-blue-dark lg:block hidden w-[400px] h-full p-2 ml-auto transition-all duration-300 top-0 right-0 ${isCarouselFixed ? "fixed" : "absolute"}`}>
             <Carousel />
           </div>
         </div>

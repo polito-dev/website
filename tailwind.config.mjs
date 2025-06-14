@@ -9,8 +9,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        'blue-light': '#ffffff',
-        'blue-dark': '#0000ff',
+        'blue-dark': '#001CE0',
       },
     },
   },
